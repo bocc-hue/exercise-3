@@ -3,33 +3,44 @@
 tasks = []
 
 def addtask(task):
-    tasks.append(task)
-    print("Task added!")
+    if not task.strip():  # Retain validation for empty input
+        print("Task cannot be empty!")
+    elif task in tasks:  # Retain validation for duplicate tasks
+        print("Task already exists!")
+    else:
+        tasks.append(task)  # Ensure proper task addition
+        print(f"Task '{task}' added!")  # Retain improved message format from the main branch
 
 def showTasks():
     if len(tasks) == 0:
         print("No tasks yet")
     else:
+        print("\nYour Tasks:")  # Retain improved formatting from the main branch
+        print("-" * 20)
         for i in range(len(tasks)):
-            print(i+1, ".", tasks[i])
+            print(f"{i+1}. {tasks[i]}")  # Retain improved task display format
+        print("-" * 20)
 
 def removetask(tasknumber):
-    if tasknumber < 1 or tasknumber > len(tasks):
+    if tasknumber < 1 or tasknumber > len(tasks):  # Retain validation for invalid task numbers
         print("Invalid task number!")
     else:
-        tasks.pop(tasknumber - 1)
-        print("Task removed!")
+        removed_task = tasks.pop(tasknumber - 1)  # Retain improved removal message
+        print(f"Task '{removed_task}' removed!")
 
 def main():
     while True:
+        print("\nTask Manager")  # Retain improved UI formatting from the main branch
+        print("=" * 20)
         print("1. Add Task")
         print("2. Show Tasks")
         print("3. Remove Task")
         print("4. Exit")
+        print("=" * 20)
         ch = input("Enter choice: ")
         if ch == "1":
             t = input("Enter task: ")
-            addtask(t)
+            addtask(t)  # Ensure proper task addition
         elif ch == "2":
             showTasks()
         elif ch == "3":
@@ -37,8 +48,9 @@ def main():
                 n = int(input("Enter task number to remove: "))
                 removetask(n)
             except ValueError:
-                print("Invalid input! Please enter a number.")
+                print("Invalid input! Please enter a number.")  # Retain validation for non-integer input
         elif ch == "4":
+            print("Goodbye!")  # Retain improved exit message
             break
         else:
             print("Wrong choice!")
